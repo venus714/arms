@@ -37,11 +37,10 @@ nav a:hover {
     margin-top: 20px;
 }
 
-/* CSS for Card */
 .card {
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    width: 250px;
+    border: 5px 5px solid #ddd;
+    border-radius: 5px 5px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
@@ -51,8 +50,12 @@ nav a:hover {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.card-content {
-    padding: 20px;
+.card img {
+    width: 40%;
+    height: auto;
+    display: block;
+    border-radius: 5px 5px;
+    margin-left: 4rem;
 }
 
 .card-title {
