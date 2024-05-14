@@ -68,3 +68,9 @@ nav a:hover {
     font-size: 16px;
     color: #666;
 }
+.container-fluid{
+    background-color: #333;
+}
+.nav-item:hover{
+    background-color:#666
+}
