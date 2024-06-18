@@ -1,0 +1,5 @@
+$sql = "SELECT 0000 as paid,amtdue from bills\n"
+
+    . "union all\n"
+
+    . "select paid,0000 as amtdue from receipts";

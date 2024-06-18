@@ -1,0 +1,56 @@
+<?php
+include 'configure.php';
+//$conn = new mysqli(DB_SERVER, DB_USER, DB_PASS, DBASE );
+$str1 = $conn->prepare("select * from tenants where tenantcode=?");
+$str1->bind_param('i', $_GET['q']);
+$str1->execute();
+$str2=$str1->get_result();
+
+$row = $str2->fetch_assoc();
+$housecode = $row['housecode'];
+$houseid = $row['houseid'];
+$tenant = $row['tenant'];
+$tenantcode = $row['tenantcode'];
+$idno = $row['idno'];
+$phone = $row['phone'];
+$email = $row['email'];
+$rent = $row['rent'];
+$datein = $row['datein'];
+$dateout = date('Y-m-d');
+echo "<div class='mypara'>";
+echo "<h3 class='header'>Tenants Details</h3>";
+echo "<form method='post' action='' autocomplete='off'>";
+echo "<input type='hidden' name='xcode' id='xcode' value ='$tenantcode'>";
+echo "<input type='hidden' name='houseid' id='houseid' value ='$houseid'>";
+echo "<input type='hidden' name='hsecode' id='hsecode' value ='$housecode'>";
+echo "<table>";
+echo "<tr>";
+echo "<th>Tenant Name</th>";
+echo "<td><input type='text' name='tenant' id='tenant' value='$tenant' readonly></td>";
+
+echo "<th>ID Number</th>";
+echo "<td><input type='text' name='idno' id='idno' value=' $idno' readonly></td>";
+echo "</tr>";
+echo "<tr>";
+echo "<th> Phone Number</th>";
+echo "<td><input type='text' name='phone' id='phone' value='$phone' readonly></td>";
+echo "<th> Email Address</th>";
+echo "<td><input type='text' name='email' id = 'email' value='$email' readonly></td>";
+echo "</tr>";
+echo "<th>Date MoveIn</th>";
+echo "<td><input type='text' name='datein' id='datein' value = '$datein' readonly></td>";
+echo "<th>Rent Per Month</th>";
+echo "<td><input type = 'text' id ='rent' name='rent' value='$rent' readonly>";
+echo "</td></tr>";
+echo "<th>Date Moved Out</th>";
+echo "<td><input type='text' name='dateout' id='dateout' value='$dateout'></td>";
+echo "</tr>";
+echo "<th></th>";
+echo "<td><button type='button' name='save' id='save'  onclick='writedata()'>Confirm Vacation</button></td>";
+echo "<th> <input type = 'reset' name='reset' id='reset' onclick='revert()'></th>";
+echo "</tr>";
+echo "</table>";
+echo "<br>";
+echo "</form>";
+echo "</div>";
+?>

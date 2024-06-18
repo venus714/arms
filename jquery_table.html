@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>How to Insert Multiple Rows with Ajax,Jquery in PHP MySQL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>  
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-11">
+                    <h2 class="text-center">How to Insert Multiple Rows with Ajax,Jquery in PHP MySQL</h2>        
+                </div>
+                <div class="col-md-1 mt-2">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="inserted_item_data" class="mt-2"></div>
+
+            <div class="modal" id="myModal">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title text-center">Insert Multiple Row</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table text-center table-striped table-bordered" id="crud_table">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>mobile</th>
+                                    <th>message</th>
+                                    <th><button type="button" name="add" id="add" class="btn btn-success">+</button></th>
+                                </tr>
+                                <tr>
+                                    <td contenteditable="true" class="name"></td>
+                                    <td contenteditable="true" class="email"></td>
+                                    <td contenteditable="true" class="mobile"></td>
+                                    <td contenteditable="true" class="message text-start"></td>
+                                    <td><button type='button' name='remove' data-row='row1' class='btn btn-danger btn-xs remove'>-</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" name="save" id="save" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        var count = 1;
+        $('#add').click(function(){
+            count = count + 1;
+            var html_code = "<tr id='row"+count+"'>";
+            html_code += "<td contenteditable='true' class='name'></td>";
+            html_code += "<td contenteditable='true' class='email'></td>";
+            html_code += "<td contenteditable='true' class='mobile'></td>";
+            html_code += "<td contenteditable='true' class='message text-start'></td>";
+            html_code += "<td><button type='button' name='remove' data-row='row"+count+"' class='btn btn-danger btn-xs remove'>-</button></td>";   
+            html_code += "</tr>";  
+            $('#crud_table').append(html_code);
+        });
+
+        $(document).on('click', '.remove', function(){
+             $(this).parent().parent().remove();
+        });
+
+        $('#save').click(function(){
+            var name = [];
+            var email = [];
+            var mobile = [];
+            var message = [];
+            
+            $('.name').each(function(){
+                name.push($(this).text());
+            });
+            
+            $('.email').each(function(){
+                email.push($(this).text());
+            });
+            
+            $('.mobile').each(function(){
+                mobile.push($(this).text());
+            });
+            
+            $('.message').each(function(){
+                message.push($(this).text());
+            });
+            
+            $.ajax({
+                url:"insert.php",
+                method:"POST",
+                data:{name:name, email:email, mobile:mobile, message:message},
+                success:function(data){
+                    alert(data);
+                    $("td[contentEditable='true']").text("");
+                        for(var i=2; i<= count; i++){
+                            $('tr#'+i+'').remove();
+                        }
+                        fetch_item_data();
+                    }
+                });
+            });
+
+        function fetch_item_data(){
+            $.ajax({
+                url:"fetch.php",
+                method:"POST",
+                    success:function(data){
+                        $('#inserted_item_data').html(data);
+                    }
+            })
+        }
+        fetch_item_data();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+$sql1 = "select trans_date,amtdue as debit,paid as credit,balcf from tenantstat where tenantcode =$tenantcode 
+and !isnull(tenantcode) order by trans_date";
+$sql2 = $conn->query($sql1);
+
+while ($rowz=$sql2->fetch_assoc())
+
+{
+	$trans_date=$rowz['trans_date'];
+	$debit = $rowz['debit'];
+	$credit = $rowz['credit'];
+	$balcf = $rowz['balcf'];
+	
+echo "<tr><td>$trans_date</td><td>$debit</td><td>$credit</td><td class='right'>$balcf</td></tr>";
+}

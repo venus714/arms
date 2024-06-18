@@ -1,0 +1,33 @@
+
+if (isset($_POST['saveme'])) {
+$plotname =$_POST['plotname'];
+$town =$_POST['town'];
+$estate =$_POST['estate'];
+$lrno =$_POST['lrno'];
+$units=$_POST['units'];
+$ptype = $_POST['ptype'];
+$ptype= $_POST['ptype'];
+$lordcode = $_POST['lordcode'];
+$mgtcom = $_POST['mgtcom'];
+$mgtflat = $_POST['mgtflat'];
+if (isset($_POST['rentvat'])) {
+	$rentvat=1;
+	$status1='checked';
+} else {
+	$rentvat =0;
+	$status1='unchecked';
+	}
+
+if (isset($_POST['lordvat'])) {
+	$lordvat=1;
+	$status2='checked';
+} else {
+	$lordvat =0;
+	$status2='unchecked';
+}
+
+$sql=$conn->prepare("insert into plots(plotname,town,estate,lrno,units,ptype,lordcode,mgtcom,mgtflat,rentvat,lordvat) 
+values(?,?,?,?,?,?,?,?,?,?,?)");
+$sql->bind_param("ssssiiiiiii",$plotname,$town,$estate,$lrno,$units,$ptype,$lordcode,$mgtcom,$mgtflat,$rentvat,$lordvat);
+$sql->execute();
+}
