@@ -7,14 +7,7 @@ session_start();
 <title>Login screen</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="mystyle.css">
-<style>
-.zform {
-	width:60%;
-	margin-left:auto;
-	margin-right: auto;
-}
-</style>
+<link rel="stylesheet" href="./login.css">
 </head>
 <?PHP
 $username = "";
@@ -61,7 +54,7 @@ if (isset($_POST['Submit1'])) {
 }
 ?>
 <div>
-<?php include 'myheader3.php';?>
+<?php ;?>
 </div>
 <body>
 <div class='header'>
@@ -70,15 +63,10 @@ if (isset($_POST['Submit1'])) {
 
 <div class='row'>
 <div class='sidebar' style='height: 500px'>
-<h3 style='color: blue'>LOGIN</h3>
-<div class='gallery1'>
-<img src='../images/login1.jpg'>
-</div>
 </div>
 
 <div class='middlebar'>
 <div class='mypara' style='text-align: center'>
-<img src='../images/login2.jpg'>
 <br><br><br>
 <FORM NAME ="form1" METHOD ="POST" ACTION ="syslogin.php" autocomplete='off'>
 <input type='hidden' autocomplete='false'>

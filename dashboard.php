@@ -35,7 +35,7 @@ $useraccess = $_SESSION['login'];
 <div>
 <?php include "mymenu.php";?>
 </div>
-<?php include "myheader4.php";?>
+<?php ?>
 <div class='row'>
 <div class='col4'>
 <div class='hz'>
